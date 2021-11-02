@@ -31,8 +31,6 @@ var app = {
   // Bind any cordova events here. Common events are:
   // 'pause', 'resume', etc.
   onDeviceReady: function (status) {
-    window.addEventListener("batterystatus", onBatteryStatus, false);
-
     console.log(status);
   },
 };

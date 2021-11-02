@@ -22,8 +22,17 @@ const htmlToElement = (html) => {
 };
 
 const fetchApiDone = (json) => {
+  //To recover the data
+  let parameters = location.search.substring(1).split("&");
+  let splitUrlToId = parameters[0].split("=");
+
+  //Select the good object in the list
+  let currentList = json.filter((x) => x.id == splitUrlToId[1])[0];
+
   const divList = document.getElementById("list");
-  json.forEach((manga, i) => {
+
+  console.log(currentList);
+  currentList.mangas.forEach((manga, i) => {
     const newDivManga = divManga
       .replace("__link__", manga.link)
       .replace("__src__", manga.img)
@@ -50,7 +59,7 @@ const fetchLocal = (url) => {
 };
 
 const fetchApiMangas = () => {
-  fetchLocal("api/mangas.json").then((response) =>
+  fetchLocal("../api/list.json").then((response) =>
     response.json().then(fetchApiDone)
   );
 };

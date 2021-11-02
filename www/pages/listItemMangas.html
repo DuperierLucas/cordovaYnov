@@ -33,7 +33,7 @@
       http-equiv="Content-Security-Policy"
       content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"
     /> -->
-    <link rel="manifest" href="manifest.json" />
+    <link rel="manifest" href="../manifest.json" />
     <script>
       window.addEventListener("load", () => {
         if ("cordova" in window) {
@@ -67,7 +67,7 @@
       name="viewport"
       content="initial-scale=1, width=device-width, viewport-fit=cover"
     />
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="../css/index.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -75,12 +75,12 @@
       crossorigin="anonymous"
     />
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"
+      src="../https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ"
       crossorigin="anonymous"
     ></script>
     <script
-      src="https://cdn.onesignal.com/sdks/OneSignalSDK.js"
+      src="../https://cdn.onesignal.com/sdks/OneSignalSDK.js"
       async=""
     ></script>
 
@@ -90,24 +90,20 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="#"
-          ><img src="img/logo.png" />Ynov Dev Web Mobile</a
+          ><img src="../img/logo.png" />Ynov Dev Web Mobile</a
         >
       </div>
     </nav>
     <main class="container-fluid">
       <div class="row">
         <div class="col">
-          <h1>Top list</h1>
+          <h1>Top mangas</h1>
         </div>
       </div>
       <div class="row" id="list"></div>
     </main>
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript" src="js/list.js"></script>
-
-    <a href="pages/listCreationItem.html" class="plus-button">
-      <img src="img/logos/plus-solid.svg" alt="plus button" />
-    </a>
+    <script type="text/javascript" src="../cordova.js"></script>
+    <script type="text/javascript" src="../js/index.js"></script>
+    <script type="text/javascript" src="../js/mangas.js"></script>
   </body>
 </html>
