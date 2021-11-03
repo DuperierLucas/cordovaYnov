@@ -37,6 +37,7 @@ function addNewList(list) {
 
 	console.log(json_data);
 	localStorage.setItem('listItems', JSON.stringify(json_data));
+	alert('New top created');
 }
 
 function formatMangas(list) {

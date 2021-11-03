@@ -2,7 +2,7 @@ const divManga = `
 <div class="col-12 col-md-4">
     <a href="__link__" target="_blank">
     <div class="card">
-    <img src="__src__" class="card-img-top" />
+    <img src="../__src__" class="card-img-top" />
     <div class="card-body">
         <h5 class="card-title">__top__. __title__</h5>
         <p class="card-text">
