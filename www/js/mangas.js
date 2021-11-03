@@ -14,63 +14,40 @@ const divManga = `
 </div>
 `;
 
+let json_data = JSON.parse(localStorage.getItem('listItems'));
+let manga_list = [];
+
 const htmlToElement = (html) => {
-  const template = document.createElement("template");
-  html = html.trim(); // Never return a text node of whitespace as the result
-  template.innerHTML = html;
-  return template.content.firstChild;
+	const template = document.createElement('template');
+	html = html.trim(); // Never return a text node of whitespace as the result
+	template.innerHTML = html;
+	return template.content.firstChild;
 };
 
-const fetchApiDone = (json) => {
-  //To recover the data
-  let parameters = location.search.substring(1).split("&");
-  let splitUrlToId = parameters[0].split("=");
+const buildMangaTop = () => {
+	//To recover the selected list
+	let parameters = location.search.substring(1).split('&');
+	let splitUrlToId = parameters[0].split('=');
 
-  //Select the good object in the list
-  let currentList = json.filter((x) => x.id == splitUrlToId[1])[0];
+	//Select the good object in the list
+	let currentList = json_data.filter((x) => x.id == splitUrlToId[1])[0];
 
-  const divList = document.getElementById("list");
+	const divList = document.getElementById('list');
 
-  console.log(currentList);
-  currentList.mangas.forEach((manga, i) => {
-    const newDivManga = divManga
-      .replace("__link__", manga.link)
-      .replace("__src__", manga.img)
-      .replace("__top__", i + 1)
-      .replace("__title__", manga.name)
-      .replace("__description__", manga.description);
-    divList.appendChild(htmlToElement(newDivManga));
-  });
+	console.log(currentList);
+	currentList.mangas.forEach((manga, i) => {
+		const newDivManga = divManga
+			.replace('__link__', manga.link)
+			.replace('__src__', manga.img)
+			.replace('__top__', i + 1)
+			.replace('__title__', manga.name)
+			.replace('__description__', manga.description);
+		divList.appendChild(htmlToElement(newDivManga));
+	});
 };
 
-const fetchLocal = (url) => {
-  return new Promise(function (resolve, reject) {
-    const xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-      resolve(new Response(xhr.response, { status: xhr.status }));
-    };
-    xhr.onerror = function () {
-      reject(new TypeError("Local request failed"));
-    };
-    xhr.open("GET", url);
-    xhr.responseType = "arraybuffer";
-    xhr.send(null);
-  });
-};
-
-const fetchApiMangas = () => {
-  fetchLocal("../api/list.json").then((response) =>
-    response.json().then(fetchApiDone)
-  );
-};
-
-const onBatteryStatus = (status) => {
-  console.log(status);
-  // alert("Level: " + status.level + " isPlugged: " + status.isPlugged);
-};
-
-if ("cordova" in window) {
-  document.addEventListener("deviceready", fetchApiMangas);
+if ('cordova' in window) {
+	document.addEventListener('deviceready', buildMangaTop);
 } else {
-  document.addEventListener("DOMContentLoaded", fetchApiMangas);
+	document.addEventListener('DOMContentLoaded', buildMangaTop);
 }
