@@ -1,5 +1,5 @@
 const divList = `
-<div class="col-12 col-md-4">
+<div class="listCardItem">
     <a href="pages/listItemMangas.html?id= __listId__">
     <div class="card">
     <div class="card-body">
@@ -14,59 +14,65 @@ const divList = `
 `;
 
 const htmlToElement = (html) => {
-	const template = document.createElement('template');
-	html = html.trim(); // Never return a text node of whitespace as the result
-	template.innerHTML = html;
-	return template.content.firstChild;
+  const template = document.createElement("template");
+  html = html.trim(); // Never return a text node of whitespace as the result
+  template.innerHTML = html;
+  return template.content.firstChild;
 };
 
 const fetchApiDone = (json) => {
-	localStorage.setItem('listItems', JSON.stringify(json));
-	buildList(json);
+  localStorage.setItem("listItems", JSON.stringify(json));
+  buildList(json);
 };
 
 const buildList = (items) => {
-	console.log(items);
-	const tempDivList = document.getElementById('list');
-	items.forEach((list, i) => {
-		const newDivList = divList
-			.replace('__top__', i + 1)
-			.replace(' __listId__', list.id)
-			.replace('__title__', list.name)
-			.replace('__description__', list.description);
-		tempDivList.appendChild(htmlToElement(newDivList));
-	});
+  console.log(items);
+  const tempDivList = document.getElementById("list");
+  items.forEach((list, i) => {
+    const newDivList = divList
+      .replace("__top__", i + 1)
+      .replace(" __listId__", list.id)
+      .replace("__title__", list.name)
+      .replace("__description__", list.description);
+    tempDivList.appendChild(htmlToElement(newDivList));
+  });
 };
 
 const fetchList = () => {
-	localStorage.getItem('listItems')
-		? buildList(JSON.parse(localStorage.getItem('listItems')))
-		: fetchLocal('api/list.json')
-				.then((response) => {
-					response.json().then(fetchApiDone);
-				})
-				.catch((err) => {
-					alert(err);
-				});
+  let VolumeControl = cordova.plugins.VolumeControl;
+
+  VolumeControl.setVolume(1.0);
+  let intro = document.getElementById("intro");
+  intro.play();
+
+  localStorage.getItem("listItems")
+    ? buildList(JSON.parse(localStorage.getItem("listItems")))
+    : fetchLocal("api/list.json")
+        .then((response) => {
+          response.json().then(fetchApiDone);
+        })
+        .catch((err) => {
+          alert(err);
+        });
 };
 
 const fetchLocal = (url) => {
-	return new Promise(function (resolve, reject) {
-		const xhr = new XMLHttpRequest();
-		xhr.onload = function () {
-			resolve(new Response(xhr.response, { status: xhr.status }));
-		};
-		xhr.onerror = function () {
-			reject(new TypeError('Local request failed'));
-		};
-		xhr.open('GET', url);
-		xhr.responseType = 'arraybuffer';
-		xhr.send(null);
-	});
+  return new Promise(function (resolve, reject) {
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      resolve(new Response(xhr.response, { status: xhr.status }));
+    };
+    xhr.onerror = function () {
+      reject(new TypeError("Local request failed"));
+    };
+    xhr.open("GET", url);
+    xhr.responseType = "arraybuffer";
+    xhr.send(null);
+  });
 };
 
-if ('cordova' in window) {
-	document.addEventListener('deviceready', fetchList);
+if ("cordova" in window) {
+  document.addEventListener("deviceready", fetchList);
 } else {
-	document.addEventListener('DOMContentLoaded', fetchList);
+  document.addEventListener("DOMContentLoaded", fetchList);
 }
