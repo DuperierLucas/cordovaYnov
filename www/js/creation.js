@@ -32,17 +32,23 @@ const fetchMangaList = () => {
 };
 
 function addNewList(list) {
-  navigator.notification.confirm("New top created", {}, "Game Over", [
-    "J'adore cette app !",
-    "Trop bien !",
-  ]);
+  //Pluggin ici (notification)
+  if ("cordova" in window) {
+    navigator.notification.confirm(
+      "New top created",
+      {},
+      "Congratulation !!!",
+      ["J'adore cette app !", "Je vous met 20/20 !"]
+    );
 
-  navigator.notification.beep(1);
+    navigator.notification.beep(1);
+  } else {
+    alert("New top added");
+  }
 
   list.id = json_data.length + 1;
   json_data.push(list);
 
-  console.log(json_data);
   localStorage.setItem("listItems", JSON.stringify(json_data));
 }
 
@@ -64,8 +70,6 @@ function validateForm() {
   let description = document.getElementById("listDescription").value;
   let unFormatedMangas = document.getElementsByName("listItem");
   let formatedManga = formatMangas(unFormatedMangas);
-
-  console.log(formatedManga);
 
   if (name === "" || description === "") {
     alert("All fields may not to be blanks !!");

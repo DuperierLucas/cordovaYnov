@@ -32,7 +32,6 @@ const buildMangaTop = () => {
 
   const divList = document.getElementById("list");
 
-  console.log(currentList);
   currentList.mangas.forEach((manga, i) => {
     const newDivManga = divManga
       .replace("__link__", manga.link)

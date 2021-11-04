@@ -1,4 +1,4 @@
-# YnovDevWebMobile
+# YnovDevWebMobile Lucas
 
 ## Installation
 
@@ -12,3 +12,8 @@ $ npm install
 $ cordova platform add/remove android
 $ cordova build/emulate android
 ```
+
+### Desktop version
+Ouvrir le dossier "/www" avec VsCode puis ouvrir l'index.html avec live serveur.
+
+Pour retrouver facilement l'emplacement des pluggins, dans vs code rechercher dans les fichier le commentaire : "//Pluggin ici"

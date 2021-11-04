@@ -14,6 +14,8 @@ var app = {
 };
 
 if (cordova.platformId == "android") {
+  //Pluggin ici (statusBar)
+
   StatusBar.backgroundColorByHexString("#643328");
 }
 

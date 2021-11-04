@@ -26,7 +26,6 @@ const fetchApiDone = (json) => {
 };
 
 const buildList = (items) => {
-  console.log(items);
   const tempDivList = document.getElementById("list");
   items.forEach((list, i) => {
     const newDivList = divList
@@ -39,11 +38,14 @@ const buildList = (items) => {
 };
 
 const fetchList = () => {
-  let VolumeControl = cordova.plugins.VolumeControl;
+  //Pluggin ici (VolumeControl)
+  if ("cordova" in window) {
+    let VolumeControl = cordova.plugins.VolumeControl;
 
-  VolumeControl.setVolume(1.0);
-  let intro = document.getElementById("intro");
-  intro.play();
+    VolumeControl.setVolume(1.0);
+    let intro = document.getElementById("intro");
+    intro.play();
+  }
 
   localStorage.getItem("listItems")
     ? buildList(JSON.parse(localStorage.getItem("listItems")))
