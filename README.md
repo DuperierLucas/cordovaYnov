@@ -14,6 +14,6 @@ $ cordova build/emulate android
 ```
 
 ### Desktop version
-Ouvrir le dossier "/www" avec VsCode puis ouvrir l'index.html avec live serveur.
+Ouvrir le dossier "/www" avec VsCode puis ouvrir l'index.html avec live serveur pour bénéficier de toutes les fonctionnalités (PWA).
 
 Pour retrouver facilement l'emplacement des pluggins, dans vs code rechercher dans les fichier le commentaire : "//Pluggin ici"
